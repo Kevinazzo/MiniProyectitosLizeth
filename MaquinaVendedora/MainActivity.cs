@@ -141,12 +141,25 @@ namespace MaquinaVendedora
 			Random rng = new Random();
 			int[] rngResult = new int[9];
 			//Escoger 9 productos aleatorios de la base de datos
+			for (int x = 0; x < rngResult.Length; x++)
+			{
+				rngResult[x] = 16;
+			}
 			for (int i = 0; i < rngResult.Length; i++)
 			{
-
+				int toAdd = rng.Next(0,15);
+				while (rngResult.Contains(toAdd))
+				{
+					toAdd = rng.Next(0,15);
+					//if (rngResult[rngResult.Length-1] == i && rngResult[rngResult.Length-1]==0)
+					//{
+					//	break;
+					//}
+				}
+				rngResult[i] = toAdd;
 			}
 
-			//colocar los resultados en la matriz o en loss espacios de la maquina 
+			//colocar los resultados en la matriz o en los espacios de la maquina 
 			int count2 = 0;
 			for (int y = 0; y < 3; y++)
 			{
