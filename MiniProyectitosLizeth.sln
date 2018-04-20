@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zodiaco", "Zodiac\Zodiaco.c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaquinaVendedora", "MaquinaVendedora\MaquinaVendedora.csproj", "{73E63F10-2AF4-4203-859D-4101E9266B6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examen2", "Examen2\Examen2.csproj", "{C9FD6165-E0D1-432B-81E6-360728292076}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,12 @@ Global
 		{73E63F10-2AF4-4203-859D-4101E9266B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73E63F10-2AF4-4203-859D-4101E9266B6E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73E63F10-2AF4-4203-859D-4101E9266B6E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C9FD6165-E0D1-432B-81E6-360728292076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9FD6165-E0D1-432B-81E6-360728292076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9FD6165-E0D1-432B-81E6-360728292076}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C9FD6165-E0D1-432B-81E6-360728292076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9FD6165-E0D1-432B-81E6-360728292076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9FD6165-E0D1-432B-81E6-360728292076}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

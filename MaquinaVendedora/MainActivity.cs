@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Widget;
+using Android.Views;
 using Android.OS;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,13 +13,12 @@ namespace MaquinaVendedora
 	[Activity(Label = "MaquinaVendedora", MainLauncher = true)]
 	public class MainActivity : Activity
 	{
-
-
 		#region var
-		public static VendingMachine vendingMachine = new VendingMachine();
+		public VendingMachine vendingMachine;
 		public ImageButton[] imgBtnRow1;
 		public ImageButton[] imgBtnRow2;
 		public ImageButton[] imgBtnRow3;
+		public ImageButton[,] integratedImgBtnMatrix;
 		ImageButton imgbtn1;
 		ImageButton imgbtn2;
 		ImageButton imgbtn3;
@@ -37,6 +37,7 @@ namespace MaquinaVendedora
 			SetContentView(Resource.Layout.Main);
 
 			#region variables
+			vendingMachine = new VendingMachine();
 			ImageButton imgbtn1 = FindViewById<ImageButton>(Resource.Id.btn_11);
 			ImageButton imgbtn2 = FindViewById<ImageButton>(Resource.Id.btn_12);
 			ImageButton imgbtn3 = FindViewById<ImageButton>(Resource.Id.btn_13);
@@ -49,52 +50,92 @@ namespace MaquinaVendedora
 			imgBtnRow1 = new ImageButton[] { imgbtn1, imgbtn2, imgbtn3, };
 			imgBtnRow2 = new ImageButton[] { imgbtn4, imgbtn5, imgbtn6, };
 			imgBtnRow3 = new ImageButton[] { imgbtn7, imgbtn8, imgbtn9 };
+			ImageButton[,] integratedImgBtnMatrix =
+				new ImageButton[3, 3] {
+					{imgBtnRow1[0],imgBtnRow1[1],imgBtnRow1[2] },
+					{imgBtnRow2[0],imgBtnRow2[1],imgBtnRow2[2] },
+					{imgBtnRow3[0],imgBtnRow3[1],imgBtnRow3[2] }
+				};
 			var metrics = Resources.DisplayMetrics;
 			var DpWidth = ConvertPixelsToDp(metrics.WidthPixels);
 			var DpHeight = ConvertPixelsToDp(metrics.HeightPixels);
 			#endregion
 			#region tamaño de los imageButton
 			//cambia el tamaño de los botones para que se  ajusten a 1/3 de la pantalla
-			foreach (var view in imgBtnRow1)
-			{
-				var vparams = view.LayoutParameters;
-				vparams.Width = ConvertDpToPix(DpWidth) / 3;
-				vparams.Height = ConvertDpToPix(DpHeight) / 3;
-			}
-			foreach (var view in imgBtnRow2)
-			{
-				var vparams = view.LayoutParameters;
-				vparams.Width = ConvertDpToPix(DpWidth) / 3;
-				vparams.Height = ConvertDpToPix(DpHeight) / 3;
-			}
-			foreach (var view in imgBtnRow3)
-			{
-				var vparams = view.LayoutParameters;
-				vparams.Width = ConvertDpToPix(DpWidth) / 3;
-				vparams.Height = ConvertDpToPix(DpHeight) / 3;
-			}
+			//foreach (var view in imgBtnRow1)
+			//{
+			//	var vparams = view.LayoutParameters;
+			//	vparams.Width = ConvertDpToPix(DpWidth) / 3;
+			//	vparams.Height = ConvertDpToPix(DpHeight) / 3;
+			//}
+			//foreach (var view in imgBtnRow2)
+			//{
+			//	var vparams = view.LayoutParameters;
+			//	vparams.Width = ConvertDpToPix(DpWidth) / 3;
+			//	vparams.Height = ConvertDpToPix(DpHeight) / 3;
+			//}
+			//foreach (var view in imgBtnRow3)
+			//{
+			//	var vparams = view.LayoutParameters;
+			//	vparams.Width = ConvertDpToPix(DpWidth) / 3;
+			//	vparams.Height = ConvertDpToPix(DpHeight) / 3;
+			//}
 			#endregion
 
 			vendingMachine.initialize();
 
 			#region añadiendo imagenes a los imageButton
-			//set images row 1
-			for (int i = 0; i < imgBtnRow1.Length; i++)
+			for (int y = 0; y < 3; y++)
 			{
-				imgBtnRow1[i].SetImageResource(vendingMachine[0, i].img);
-			}
-			//set images row 2
-			for (int i = 0; i < imgBtnRow2.Length; i++)
-			{
-				imgBtnRow2[i].SetImageResource(vendingMachine[1, i].img);
-			}
-			//set images row 3
-			for (int i = 0; i < imgBtnRow1.Length; i++)
-			{
-				imgBtnRow3[i].SetImageResource(vendingMachine[2, i].img);
+				for (int x = 0; x < 3; x++)
+				{
+					var vparams = integratedImgBtnMatrix[x, y].LayoutParameters;
+					vparams.Width = ConvertDpToPix(DpWidth) / 3;
+					vparams.Height = ConvertDpToPix(DpHeight) / 3;
+					integratedImgBtnMatrix[x, y].SetImageResource(vendingMachine[x, y].img);
+				}
 			}
 			#endregion
+			#region evento click
+			integratedImgBtnMatrix[0, 0].Click += delegate
+			{
+				Toast.MakeText(this, vendingMachine[0, 0].name + " cuesta $" + vendingMachine[0, 0].price, ToastLength.Short).Show();;
+			};
+			integratedImgBtnMatrix[0, 1].Click += delegate
+			{
+				Toast.MakeText(this, vendingMachine[0, 1].name + " cuesta $" + vendingMachine[0, 1].price, ToastLength.Short).Show();;
+			};
+			integratedImgBtnMatrix[0, 2].Click += delegate
+			{
+				Toast.MakeText(this, vendingMachine[0, 2].name + " cuesta $" + vendingMachine[0, 2].price, ToastLength.Short).Show();;
+			};
+			integratedImgBtnMatrix[1, 0].Click += delegate
+			{
+				Toast.MakeText(this, vendingMachine[1, 0].name + " cuesta $" + vendingMachine[1, 0].price, ToastLength.Short).Show();;
+			};
+			integratedImgBtnMatrix[1, 1].Click += delegate
+			{
+				Toast.MakeText(this, vendingMachine[1, 1].name + " cuesta $" + vendingMachine[1, 1].price, ToastLength.Short).Show();;
+			};
+			integratedImgBtnMatrix[1, 2].Click += delegate
+			{
+				Toast.MakeText(this, vendingMachine[1, 2].name + " cuesta $" + vendingMachine[1, 2].price, ToastLength.Short).Show();;
+			};
+			integratedImgBtnMatrix[2, 0].Click += delegate
+			{
+				Toast.MakeText(this, vendingMachine[2, 0].name + " cuesta $" + vendingMachine[2, 0].price, ToastLength.Short).Show();;
+			};
+			integratedImgBtnMatrix[2, 1].Click += delegate
+			{
+				Toast.MakeText(this, vendingMachine[2, 1].name + " cuesta $" + vendingMachine[2, 1].price, ToastLength.Short).Show();;
+			};
+			integratedImgBtnMatrix[2, 2].Click += delegate
+			 {
+				 Toast.MakeText(this, vendingMachine[2, 2].name + " cuesta $" + vendingMachine[2, 2].price, ToastLength.Short).Show();;
+			 };
+			#endregion
 		}
+
 		#region tamaño de la pantalla,Conversion de datos
 		private int ConvertPixelsToDp(float pixelValue)
 		{
@@ -147,10 +188,10 @@ namespace MaquinaVendedora
 			}
 			for (int i = 0; i < rngResult.Length; i++)
 			{
-				int toAdd = rng.Next(0,15);
+				int toAdd = rng.Next(0, 15);
 				while (rngResult.Contains(toAdd))
 				{
-					toAdd = rng.Next(0,15);
+					toAdd = rng.Next(0, 15);
 					//if (rngResult[rngResult.Length-1] == i && rngResult[rngResult.Length-1]==0)
 					//{
 					//	break;
@@ -166,7 +207,7 @@ namespace MaquinaVendedora
 				for (int x = 0; x < 3; x++)
 				{
 					Product toAdd2 = db[rngResult[count2]];
-					slots[x,y] = toAdd2;
+					slots[x, y] = toAdd2;
 					count2++;
 				}
 			}
@@ -184,11 +225,11 @@ namespace MaquinaVendedora
 		public Product(string _name, float _desc, int _img)
 		{
 			name = _name;
-			desc = _desc;
+			price = _desc;
 			img = _img;
 		}
 		public string name { get; set; }
-		public float desc { get; set; }
+		public float price { get; set; }
 		public int img { get; set; }
 	}
 	#endregion
